@@ -18,13 +18,19 @@ $ npm install -g npm-views
 ```sh
 $ npm-views --help
 
-  Usage: cli <filePath>
-
+  Usage: npm-views <filePath>
+  
   List and describe project dependencies
-
+  
   Options:
     -v, --version  output the version number
     -h, --help     output usage information
+```
+
+## Example
+
+```sh
+$ npm-views my-app/src/package.json
 ```
 
 ## License
