@@ -1,0 +1,44 @@
+{
+	"name": "npm-views",
+	"version": "1.0.0",
+	"description": "List and describe project dependencies",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/VeronQ/npm-views.git"
+	},
+	"scripts": {
+		"lint": "eslint -c .eslintrc.json 'bin/cli'"
+	},
+	"bin": {
+		"npm-views": "./bin/cli"
+	},
+	"keywords": [
+		"cli",
+		"npm",
+		"view",
+		"packages",
+		"dependencies"
+	],
+	"author": {
+		"name": "Quentin Veron",
+		"email": "qveron@outlook.com"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/VeronQ/npm-views/issues"
+	},
+	"dependencies": {
+		"chalk": "^2.4.2",
+		"commander": "^2.20.0",
+		"hyperlinker": "^1.0.0"
+	},
+	"devDependencies": {
+		"eslint": "^6.0.1",
+		"eslint-config-standard": "^13.0.1",
+		"eslint-plugin-import": "^2.18.0",
+		"eslint-plugin-node": "^9.1.0",
+		"eslint-plugin-promise": "^4.2.1",
+		"eslint-plugin-standard": "^4.0.0"
+	}
+}

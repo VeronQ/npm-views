@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+const { exec } = require('child_process')
+const path = require('path')
+
+const program = require('commander')
+const chalk = require('chalk')
+const hyperlinker = require('hyperlinker')
+
+const { description, version } = require('../package.json')
+
+const NPM_BASE_URL = 'https://www.npmjs.com'
+
+program
+	.version(version, '-v, --version')
+	.description(description)
+	.usage('<filePath>')
+	.parse(process.argv)
+
+if (!process.argv.slice(2).length) {
+	program.outputHelp()
+	process.exit()
+}
+
+const filePath = program.args[0]
+
+const packageJson = require(path.join(process.cwd(), filePath))
+
+const deps = {
+	...packageJson.dependencies || {},
+	...packageJson.devDependencies || {}
+}
+
+console.log()
+
+Object.keys(deps).forEach((key) => {
+	exec(`npm view ${key} --json`, (error, stdout) => {
+		if (!stdout) return
+
+		const data = JSON.parse(stdout)
+		const repoUrl = [NPM_BASE_URL, key].join('/')
+
+		console.log(hyperlinker(chalk.cyan(key), repoUrl) + chalk.gray(` (${deps[key]})`))
+		console.log(data.description)
+		console.log()
+	})
+})
