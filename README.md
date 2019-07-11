@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/npm-views.svg)](https://npmjs.org/package/npm-views "View this project on npm")
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/VeronQ/npm-views/blob/master/LICENSE)
  
-<img src="doc/demo.png" width="400">
+<img src="doc/demo.png" width="640">
  
 ## Installation
 
