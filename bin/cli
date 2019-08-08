@@ -14,7 +14,7 @@ program
 	.version(version, '-v, --version')
 	.description(description)
 	.usage('<filePath>')
-	.option('-t, --table', 'view in table format')
+	.option('-t, --table', 'view in a table format')
 	.parse(process.argv)
 
 if (!process.argv.slice(2).length) {
