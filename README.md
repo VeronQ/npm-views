@@ -6,6 +6,11 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/VeronQ/npm-views/blob/master/LICENSE)
  
 <img src="doc/demo-min.png" width="640">
+
+## Prerequisite
+
+* `Node.js` >= 8.0.0
+* `npm` >= 6.0.0
  
 ## Installation
 
@@ -24,13 +29,16 @@ $ npm-views --help
   
   Options:
     -v, --version  output the version number
+    -t, --table    view in a table format
     -h, --help     output usage information
 ```
 
 ## Example
 
+**Output in a table format**
+
 ```sh
-$ npm-views my-app/src/package.json
+$ npm-views my-app/src/package.json --table
 ```
 
 ## License
