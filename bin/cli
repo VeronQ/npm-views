@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-const { exec } = require('child_process')
 const path = require('path')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 
 const program = require('commander')
 const chalk = require('chalk')
@@ -9,12 +10,11 @@ const hyperlinker = require('hyperlinker')
 
 const { description, version } = require('../package.json')
 
-const NPM_BASE_URL = 'https://www.npmjs.com'
-
 program
 	.version(version, '-v, --version')
 	.description(description)
 	.usage('<filePath>')
+	.option('-t, --table', 'view in table format')
 	.parse(process.argv)
 
 if (!process.argv.slice(2).length) {
@@ -22,26 +22,80 @@ if (!process.argv.slice(2).length) {
 	process.exit()
 }
 
+// Get first argument
 const filePath = program.args[0]
 
+// Require targeted package.json file
 const packageJson = require(path.join(process.cwd(), filePath))
 
+// Merge dependencies and dev dependencies
 const deps = {
 	...packageJson.dependencies || {},
 	...packageJson.devDependencies || {}
 }
 
-console.log()
+const hasTableFlag = 'table' in program
 
-Object.keys(deps).forEach((key) => {
-	exec(`npm view ${key} --json`, (error, stdout) => {
-		if (!stdout) return
+// Initialize empty stream
+let stream
 
-		const data = JSON.parse(stdout)
-		const repoUrl = [NPM_BASE_URL, key].join('/')
+// If table flag is true
+if (hasTableFlag) {
+	// Require table properties
+	const {
+		createStream,
+		getBorderCharacters
+	} = require('table')
 
-		console.log(hyperlinker(chalk.cyan(key), repoUrl) + chalk.gray(` (${deps[key]})`))
-		console.log(data.description)
-		console.log()
-	})
-})
+	// Initialize table configuration
+	const config = {
+		columnDefault: {
+			width: 40
+		},
+		columnCount: 3,
+		columns: {
+			0: {
+				width: 20
+			},
+			1: {
+				width: 10
+			},
+			2: {
+				wrapWord: true
+			}
+		},
+		border: getBorderCharacters('norc')
+	}
+
+	// Create stream
+	stream = createStream(config)
+}
+
+// Retrieve the description and the link of each dependency
+(async () => {
+	console.log()
+
+	await Promise.all(Object.keys(deps).map(async (dep) => {
+		try {
+			const { stdout } = await exec(`npm view ${dep} --json`)
+			const { description, homepage } = JSON.parse(stdout)
+
+			if (hasTableFlag) {
+				stream.write([
+					chalk.cyan(dep),
+					chalk.gray(deps[dep]),
+					description
+				])
+			} else {
+				console.log(hyperlinker(chalk.cyan(dep), homepage) + chalk.gray(` (${deps[dep]})`))
+				console.log(description + '\n')
+			}
+		} catch({ message }) {
+			console.error(message)
+		}
+	}))
+
+	if (hasTableFlag) {
+		console.log('\n')
+	}
+})()
