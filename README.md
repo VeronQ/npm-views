@@ -20,7 +20,7 @@ $ npm install -g npm-views
 
 ## Usage
 
-```sh
+```
 $ npm-views --help
 
   Usage: npm-views <filePath>
