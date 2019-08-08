@@ -13,6 +13,10 @@
 	"bin": {
 		"npm-views": "./bin/cli"
 	},
+	"engines": {
+		"node": ">=8",
+		"npm": ">=6.0.0"
+	},
 	"keywords": [
 		"cli",
 		"npm",
@@ -31,7 +35,8 @@
 	"dependencies": {
 		"chalk": "^2.4.2",
 		"commander": "^2.20.0",
-		"hyperlinker": "^1.0.0"
+		"hyperlinker": "^1.0.0",
+		"table": "^5.4.5"
 	},
 	"devDependencies": {
 		"eslint": "^6.0.1"
