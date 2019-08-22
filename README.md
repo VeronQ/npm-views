@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/npm-views.svg)](https://npmjs.org/package/npm-views "View this project on npm")
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/VeronQ/npm-views/blob/master/LICENSE)
  
-<img src="doc/demo-min.png" width="640">
+![Demo CLI](../assets/screenshot.png?raw=true)
 
 ## Prerequisite
 
