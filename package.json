@@ -2,7 +2,6 @@
 	"name": "npm-views",
 	"version": "1.2.1",
 	"description": "List and describe project dependencies",
-	"main": "index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/VeronQ/npm-views.git"
@@ -11,8 +10,11 @@
 		"lint": "eslint -c .eslintrc.json 'bin/cli'"
 	},
 	"bin": {
-		"npm-views": "./bin/cli"
+		"npm-views": "bin/cli"
 	},
+	"files": [
+		"bin/cli"
+	],
 	"engines": {
 		"node": ">=8.0.0",
 		"npm": ">=6.0.0"
