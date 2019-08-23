@@ -8,7 +8,7 @@ const program = require('commander')
 const chalk = require('chalk')
 const hyperlinker = require('hyperlinker')
 
-const { description, version } = require('../package.json')
+const {description, version} = require('../package.json')
 
 program
 	.version(version, '-v, --version')
@@ -77,8 +77,8 @@ if (hasTableFlag) {
 
 	await Promise.all(Object.keys(deps).map(async (dep) => {
 		try {
-			const { stdout } = await exec(`npm view ${dep} --json`)
-			const { description, homepage } = JSON.parse(stdout)
+			const {stdout} = await exec(`npm view ${dep} --json`)
+			const {description, homepage} = JSON.parse(stdout)
 
 			if (hasTableFlag) {
 				stream.write([
@@ -90,7 +90,7 @@ if (hasTableFlag) {
 				console.log(hyperlinker(chalk.cyan(dep), homepage) + chalk.gray(` (${deps[dep]})`))
 				console.log(description + '\n')
 			}
-		} catch({ message }) {
+		} catch ({message}) {
 			console.error(message)
 		}
 	}))
