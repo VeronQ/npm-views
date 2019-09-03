@@ -44,4 +44,4 @@ $ npm-views my-app/src/package.json --table
 
 ## License
 
-MIT
+[MIT](https://github.com/VeronQ/npm-views/blob/master/LICENSE)
