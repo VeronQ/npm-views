@@ -8,18 +8,18 @@ const program = require('commander')
 const chalk = require('chalk')
 const hyperlinker = require('hyperlinker')
 
-const {description, version} = require('../package.json')
+const { description, version } = require('../package.json')
 
 program
-	.version(version, '-v, --version')
-	.description(description)
-	.usage('<filePath>')
-	.option('-t, --table', 'view in a table format')
-	.parse(process.argv)
+  .version(version, '-v, --version')
+  .description(description)
+  .usage('<filePath>')
+  .option('-t, --table', 'view in a table format')
+  .parse(process.argv)
 
 if (!process.argv.slice(2).length) {
-	program.outputHelp()
-	process.exit()
+  program.outputHelp()
+  process.exit()
 }
 
 // Get first argument
@@ -30,72 +30,73 @@ const packageJson = require(path.join(process.cwd(), filePath))
 
 // Merge dependencies and dev dependencies
 const deps = {
-	...packageJson.dependencies || {},
-	...packageJson.devDependencies || {}
+  ...packageJson.dependencies || {},
+  ...packageJson.devDependencies || {},
 }
 
-const hasTableFlag = 'table' in program
+const hasTableFlag = program.hasOwnProperty('table')
 
 // Initialize empty stream
 let stream
 
 // If table flag is true
 if (hasTableFlag) {
-	// Require table properties
-	const {
-		createStream,
-		getBorderCharacters
-	} = require('table')
+  // Require table properties
+  const {
+    createStream,
+    getBorderCharacters,
+  } = require('table')
 
-	// Initialize table configuration
-	const config = {
-		columnDefault: {
-			width: 40
-		},
-		columnCount: 3,
-		columns: {
-			0: {
-				width: 20
-			},
-			1: {
-				width: 10
-			},
-			2: {
-				wrapWord: true
-			}
-		},
-		border: getBorderCharacters('norc')
-	}
+  // Initialize table configuration
+  const config = {
+    columnDefault: {
+      width: 40,
+    },
+    columnCount: 3,
+    columns: {
+      0: {
+        width: 20,
+      },
+      1: {
+        width: 10,
+      },
+      2: {
+        wrapWord: true,
+      },
+    },
+    border: getBorderCharacters('norc'),
+  }
 
-	// Create stream
-	stream = createStream(config)
+  // Create stream
+  stream = createStream(config)
 }
 
 // Retrieve the description and the link of each dependency
 (async () => {
-	console.log()
+  console.log()
 
-	await Promise.all(Object.keys(deps).map(async (dep) => {
-		try {
-			const {stdout} = await exec(`npm view ${dep} --json`)
-			const {description, homepage} = JSON.parse(stdout)
+  await Promise.all(Object.keys(deps).map(async (dep) => {
+    try {
+      const { stdout } = await exec(`npm view ${dep} --json`)
+      const { description, homepage } = JSON.parse(stdout)
 
-			if (hasTableFlag) {
-				stream.write([
-					chalk.cyan(dep),
-					chalk.gray(deps[dep]),
-					description
-				])
-			} else {
-				console.log(hyperlinker(chalk.cyan(dep), homepage) + chalk.gray(` (${deps[dep]})`))
-				console.log(description + '\n')
-			}
-		} catch ({message}) {
-			console.error(message)
-		}
-	}))
+      if (hasTableFlag) {
+        stream.write([
+          chalk.cyan(dep),
+          chalk.gray(deps[dep]),
+          description,
+        ])
+      } else {
+        console.log(hyperlinker(chalk.cyan(dep), homepage) +
+          chalk.gray(` (${deps[dep]})`))
+        console.log(description + '\n')
+      }
+    } catch ({ message }) {
+      console.error(message)
+    }
+  }))
 
-	if (hasTableFlag) {
-		console.log('\n')
-	}
+  if (hasTableFlag) {
+    console.log('\n')
+  }
 })()

@@ -3,8 +3,9 @@
 > List and describe project dependencies
 
 [![npm version](https://badge.fury.io/js/npm-views.svg)](https://npmjs.org/package/npm-views "View this project on npm")
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/VeronQ/npm-views/blob/master/LICENSE)
- 
+
 ![Demo CLI](../assets/screenshot.png?raw=true)
 
 ## Prerequisite
