@@ -6,9 +6,7 @@
 		"type": "git",
 		"url": "https://github.com/VeronQ/npm-views.git"
 	},
-	"scripts": {
-		"lint": "eslint -c .eslintrc.json 'bin/cli'"
-	},
+	"scripts": {},
 	"bin": {
 		"npm-views": "bin/cli"
 	},
