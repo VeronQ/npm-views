@@ -1,6 +1,6 @@
 {
 	"name": "npm-views",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "List and describe project dependencies",
 	"repository": {
 		"type": "git",
@@ -33,10 +33,10 @@
 		"url": "https://github.com/VeronQ/npm-views/issues"
 	},
 	"dependencies": {
-		"chalk": "^2.4.2",
-		"commander": "^2.20.0",
+		"chalk": "^3.0.0",
+		"commander": "^4.1.1",
 		"hyperlinker": "^1.0.0",
-		"table": "^5.4.5"
+		"table": "^5.4.6"
 	},
 	"devDependencies": {}
 }
