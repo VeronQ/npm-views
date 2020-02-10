@@ -1,6 +1,6 @@
 {
 	"name": "npm-views",
-	"version": "1.3.4",
+	"version": "1.3.5",
 	"description": "List and describe project dependencies",
 	"repository": {
 		"type": "git",
