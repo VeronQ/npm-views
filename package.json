@@ -1,12 +1,14 @@
 {
 	"name": "npm-views",
-	"version": "1.2.4",
+	"version": "1.3.4",
 	"description": "List and describe project dependencies",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/VeronQ/npm-views.git"
 	},
-	"scripts": {},
+	"scripts": {
+		"test": "ava"
+	},
 	"bin": {
 		"npm-views": "bin/cli"
 	},
@@ -38,5 +40,8 @@
 		"hyperlinker": "^1.0.0",
 		"table": "^5.4.6"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"ava": "^3.2.0",
+		"execa": "^4.0.0"
+	}
 }
