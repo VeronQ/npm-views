@@ -1,6 +1,6 @@
 {
 	"name": "npm-views",
-	"version": "1.3.5",
+	"version": "1.3.6",
 	"description": "List and describe project dependencies",
 	"repository": {
 		"type": "git",
@@ -13,7 +13,8 @@
 		"npm-views": "bin/cli"
 	},
 	"files": [
-		"bin/cli"
+		"bin/cli",
+    "lib/"
 	],
 	"engines": {
 		"node": ">=8.0.0",
